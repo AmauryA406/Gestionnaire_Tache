@@ -1,5 +1,6 @@
 /**
  * Exercice 3 : Collections, Boucles et Menu Interactif
+ * Version autonome avec toutes les classes nécessaires
  *
  * Objectifs :
  * - Utiliser MutableList et List
@@ -9,9 +10,9 @@
  */
 
 /**
- * Classe de données Task (réutilisée de l'exercice 2)
+ * Classe de données Task pour l'Exercice 3
  */
-data class Task(
+data class TaskEx3(
     val id: Int,
     val description: String,
     var isDone: Boolean = false
@@ -31,17 +32,17 @@ data class Task(
 }
 
 /**
- * Classe TaskManager étendue avec toutes les fonctionnalités
+ * Classe TaskManager complète pour l'Exercice 3
  */
-class TaskManager {
-    private val tasks: MutableList<Task> = mutableListOf()
+class TaskManagerEx3 {
+    private val tasks: MutableList<TaskEx3> = mutableListOf()
     private var nextId: Int = 1
 
     /**
      * Ajoute une nouvelle tâche
      */
-    fun addTask(description: String): Task {
-        val newTask = Task(nextId, description)
+    fun addTask(description: String): TaskEx3 {
+        val newTask = TaskEx3(nextId, description)
         tasks.add(newTask)
         nextId++
         return newTask
@@ -120,7 +121,7 @@ class TaskManager {
     /**
      * Recherche une tâche par mot-clé dans la description
      */
-    fun searchTasks(keyword: String): List<Task> {
+    fun searchTasks(keyword: String): List<TaskEx3> {
         if (keyword.isBlank()) {
             println("❌ Le mot-clé de recherche ne peut pas être vide.")
             return emptyList()
@@ -181,11 +182,11 @@ class TaskManager {
     }
 
     // Méthodes utilitaires
-    fun findTaskById(id: Int): Task? = tasks.find { it.id == id }
+    fun findTaskById(id: Int): TaskEx3? = tasks.find { it.id == id }
     fun getTaskCount(): Int = tasks.size
     fun getCompletedTaskCount(): Int = tasks.count { it.isDone }
     fun getPendingTaskCount(): Int = tasks.count { !it.isDone }
-    fun getAllTasks(): List<Task> = tasks.toList()
+    fun getAllTasks(): List<TaskEx3> = tasks.toList()
 
     /**
      * Affiche les statistiques détaillées
@@ -231,7 +232,7 @@ class TaskManager {
 /**
  * Classe pour gérer l'interface utilisateur du menu
  */
-class TaskMenuUI(private val taskManager: TaskManager) {
+class TaskMenuUI(private val taskManager: TaskManagerEx3) {
 
     /**
      * Affiche le menu principal
@@ -448,7 +449,7 @@ class TaskMenuUI(private val taskManager: TaskManager) {
 /**
  * Fonction pour créer des tâches d'exemple
  */
-fun createSampleTasks(taskManager: TaskManager) {
+fun createSampleTasks(taskManager: TaskManagerEx3) {
     println("📦 Création de tâches d'exemple...")
 
     val sampleTasks = listOf(
@@ -482,7 +483,7 @@ fun main() {
     println("=== EXERCICE 3 : GESTIONNAIRE DE TÂCHES INTERACTIF ===\n")
 
     // Créer le gestionnaire de tâches
-    val taskManager = TaskManager()
+    val taskManager = TaskManagerEx3()
 
     // Demander si l'utilisateur veut des tâches d'exemple
     print("🤔 Voulez-vous créer des tâches d'exemple pour tester ? (o/n) : ")
